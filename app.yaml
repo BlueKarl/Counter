@@ -1,4 +1,4 @@
-appname: "celerypro"
+appname: "logcount"
 entrypoints:
     command:
         cmd: "python main.py redis-logcount.yg.hunantv.com:8889"
