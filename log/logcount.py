@@ -3,6 +3,7 @@
 import sys
 import json
 import time
+import logging
 import redis
 from log import config
 from log.logdeal import logcount
@@ -13,6 +14,7 @@ def logsend(host, port):
     pub.subscribe(config.SUBSCRIBE)
     while True:
         m = pub.get_message()
+        logging.warning(m)
         if not m or not m.get('data'):
             continue
         data = str(m["data"])
