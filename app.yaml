@@ -1,7 +1,7 @@
 appname: "logcount"
 entrypoints:
     command:
-        cmd: "python main.py redis-logcount.yg.hunantv.com:8889"
+        cmd: "python main.py 10.222.46.215:8889"
 build:
   - "pip install -r requirements.txt"
 meta:
