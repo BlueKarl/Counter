@@ -1,7 +1,11 @@
 appname: "logcount"
 entrypoints:
-    command:
-        cmd: "python main.py 10.222.46.215:8889"
+  command:
+    cmd: "python main.py logcount.intra.hunantv.com:8889"
+  web:
+    cmd: "python app.py"
+    ports:
+      - "5000/tcp"
 build:
   - "pip install -r requirements.txt"
 meta:

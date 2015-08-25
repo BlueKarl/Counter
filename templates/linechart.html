@@ -1,0 +1,68 @@
+<html>
+<head>
+<script src="../static/js/Chart.js"></script>
+<script src="../static/js/jQuery.min.js"></script>   
+<script src="../static/js/flat-ui.min.js"></script>
+<link rel="stylesheet" type="text/css" href="../static/css/flat-ui.min.css">
+</head>
+<body style="background-image: url(../static/images/pattern.png), url(../static/images/background.jpg);">
+  <canvas id="canvas"></canvas>
+  <form action="" method="POST">
+    <div class="input-group" style="text-align:center">
+      <span class="input-group-addon">输入</span>
+      <input type="text" name='dates' class="form-control" placeholder="格式：name-entrypoint-date  如：odan-web-macvlan-2015-08-22" id='1' style='width: 480px;'/>
+    <button id='count' type="button" class='btn btn-primary'>开始绘图</button>
+    </div>
+  </form>
+<script>
+$('#count').click(function(){
+    var date_value = $("#1").val();
+    var a;
+    var b;
+    $.get("/request/data/" + date_value, function(data){
+        a = data;
+    });
+    $.ajax({
+        type: "GET",
+        async: false, //同步执行
+        url: "/request/data/"+date_value,
+        dataType: 'json',
+        success: function(result){
+        a=result
+        }
+    });
+
+    $.ajax({
+        type: "GET",
+        async: false, //同步执行
+        url: "/request/numbers/"+date_value,
+        dataType: 'json',
+        success: function(result){
+        b=result
+        }
+    });
+
+    var lineChartData = {
+        labels : a,
+        datasets : [
+            {
+                label: "QPS",
+                fillColor : "rgba(127,255,212,0.2)",
+                strokeColor : "rgba(0,100,0,1)",
+                pointColor : "rgba(0,100,0,1)",
+                pointStrokeColor : "#bbb",
+                pointHighlightFill : "#bbb",
+                pointHighlightStroke : "rgba(0,0,0,1)",
+                data : b
+            },
+        ]
+    } 
+    var ctx = document.getElementById("canvas").getContext("2d");
+    window.myLine = new Chart(ctx).Line(lineChartData, {
+        responsive: true
+    });
+});
+</script>
+</body>
+</html>
+
