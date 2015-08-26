@@ -1,7 +1,7 @@
 appname: "logcount"
 entrypoints:
   command:
-    cmd: "python main.py logcount.intra.hunantv.com:8889"
+    cmd: "python main.py"
   web:
     cmd: "python app.py"
     ports:
