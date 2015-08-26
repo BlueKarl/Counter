@@ -9,7 +9,7 @@ from log import config
 from log.logdeal import logcount
 
 def logsend(host, port):
-    rds = redis.Redis(host=host, port=int(port))
+    rds = redis.Redis(host=host, port=port)
     pub = rds.pubsub()
     pub.subscribe(config.SUBSCRIBE)
     while True:

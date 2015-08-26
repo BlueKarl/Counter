@@ -3,10 +3,12 @@
 
 import sys
 from log.logcount import logsend
+from log import config
 
 def start():
-    u = sys.argv[-1].split(':')    
-    logsend(u[0], u[1])
+#    u = sys.argv[-1].split(':')    
+#    logsend(u[0], u[1])
+    logsend(host=config.REDIS_HOST, port=config.REDIS_PORT)
 
 if __name__ == '__main__':
     start()
