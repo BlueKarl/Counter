@@ -4,6 +4,8 @@ REDIS_HOST = os.getenv('REDIS_HOST', 'logcount.intra.hunantv.com')
 REDIS_PORT = os.getenv('REDIS_PORT', 8889)
 #REDIS_HOST = os.getenv('REDIS_HOST', 'localhost')
 #REDIS_PORT = os.getenv('REDIS_PORT', 6379)
+#REDIS_HOST = os.getenv('REDIS_HOST', 'redis-logcount.yg.hunantv.com')
+#REDIS_PORT = os.getenv('REDIS_PORT', 8889)
 
 CELERY_NAME = os.getenv('CELERY_NAME','logdeal')
 CELERY_BROKER_URL = 'redis://%s:%d' % (REDIS_HOST, REDIS_PORT)
