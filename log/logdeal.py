@@ -1,7 +1,6 @@
 #coding:utf-8
 
 import time
-import redis
 from log import celeryconnect, redisconnect
 
 app = celeryconnect()

@@ -14,11 +14,11 @@ def logsend(host, port):
     pub.subscribe(config.SUBSCRIBE)
     while True:
         m = pub.get_message()
-        if m:
-            logging.warning(m)
         if not m or not m.get('data'):
             continue
+        logging.warning(m)
         data = str(m["data"])
         data_value = json.loads(data)
         if isinstance(data_value, dict):
+            print data_value
             logcount.delay(data_value)
