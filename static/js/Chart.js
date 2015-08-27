@@ -79,7 +79,7 @@
 			scaleStartValue: null,
 
 			// String - Colour of the scale line
-			scaleLineColor: "rgba(0,0,0,.1)",
+			scaleLineColor: "rgba(255,255,255,1)",
 
 			// Number - Pixel width of the scale line
 			scaleLineWidth: 1,
@@ -106,7 +106,7 @@
 			scaleFontStyle: "normal",
 
 			// String - Scale label font colour
-			scaleFontColor: "#666",
+			scaleFontColor: "#fff",
 
 			// Boolean - whether or not the chart should be responsive and resize when the browser does.
 			responsive: false,

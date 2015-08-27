@@ -11,6 +11,7 @@ from log.logdeal import logcount
 def logsend(host, port):
     rds = redis.Redis(host=host, port=port)
     pub = rds.pubsub()
+    logging.warning(pub)
     pub.subscribe(config.SUBSCRIBE)
     while True:
         m = pub.get_message()
@@ -20,5 +21,5 @@ def logsend(host, port):
         data = str(m["data"])
         data_value = json.loads(data)
         if isinstance(data_value, dict):
-            print data_value
+            logging.warning(data_value)
             logcount.delay(data_value)

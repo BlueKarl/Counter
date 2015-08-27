@@ -1,4 +1,8 @@
 import os
+#PROXY_REDIS_HOST = os.getenv('REDIS_HOST', 'localhost')
+#PROXY_REDIS_PORT = os.getenv('REDIS_PORT', 6379)
+#REDIS_HOST = os.getenv('REDIS_HOST', 'localhost')
+#REDIS_PORT = os.getenv('REDIS_PORT', 6379)
 
 PROXY_REDIS_HOST = os.getenv('REDIS_HOST', '10.200.8.29')
 PROXY_REDIS_PORT = os.getenv('REDIS_PORT', 8802)

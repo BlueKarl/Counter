@@ -6,12 +6,8 @@ from QPSmonitor.search import search
 
 app = Flask(__name__)
 
-@app.route('/')
+@app.route('/', methods=['GET', 'POST'])
 def index():
-    return render_template('menu.html')
-
-@app.route('/linechart', methods=['GET', 'POST'])
-def menu():
     return render_template('linechart.html')
 
 @app.route('/request/data/<date_value>')
