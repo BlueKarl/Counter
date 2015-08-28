@@ -2,14 +2,17 @@
 
 import time
 import logging
-from log import celeryconnect, redisconnect
+from rq.decorators import job
+from log import redisconnect
+from log import config
 
-app = celeryconnect()
+#app = celeryconnect()
 rds = redisconnect()
 
-@app.task
+#@app.task
+#def logcount(msg):
+@job(config.RQ_WORKER_LEVEL, connection=rds, timeout=5)
 def logcount(msg):
     main_key = "%s-%s-%s" % (msg['name'], msg['entrypoint'], msg['date'])
     timestamp = time.mktime(time.strptime(msg['datetime'], '%Y-%m-%d %H:%M:%S'))
-    logging.info(main_key)
     rds.hincrby(main_key, timestamp, 1)

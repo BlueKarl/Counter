@@ -1,7 +1,7 @@
 appname: "logcount"
 entrypoints:
   celery:
-    cmd: "celery -A log.logdeal worker --loglevel=debug -E"
+    cmd: "rqworker low"
   command:
     cmd: "python main.py"
   web:
