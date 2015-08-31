@@ -5,7 +5,7 @@ import os
 #REDIS_PORT = os.getenv('REDIS_PORT', 6379)
 
 PROXY_REDIS_HOST = os.getenv('PROXY_REDIS_HOST', '10.200.8.29')
-PROXY_REDIS_PORT = os.getenv('PORXY_REDIS_PORT', 8802)
+PROXY_REDIS_PORT = os.getenv('PROXY_REDIS_PORT', 8802)
 REDIS_HOST = os.getenv('REDIS_HOST', '10.222.102.255')
 REDIS_PORT = os.getenv('REDIS_PORT', 6379)
 #REDIS_HOST = os.getenv('REDIS_HOST', '10.222.46.215')
@@ -17,6 +17,6 @@ CELERY_NAME = os.getenv('CELERY_NAME','logdeal')
 CELERY_BROKER_URL = 'redis://%s:%d' % (REDIS_HOST, REDIS_PORT)
 CELERY_RESULT_BACKEND = 'redis://%s:%d' % (REDIS_HOST, REDIS_PORT)
 
-RQ_WORKER_LEVEL = os.getenv('RQ_WORKER_LEVEL', 'low')
+#RQ_WORKER_LEVEL = os.getenv('RQ_WORKER_LEVEL', 'low')
 
 SUBSCRIBE = os.getenv('SUBSCRIBE', 'ERU:LOGCOUNT')
