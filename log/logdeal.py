@@ -6,12 +6,12 @@ from rq.decorators import job
 from log import redisconnect
 from log import config
 
-#app = celeryconnect()
+app = celeryconnect()
 rds = redisconnect()
 
-#@app.task
-#def logcount(msg):
-@job(config.RQ_WORKER_LEVEL, connection=rds, timeout=5)
+@app.task
+def logcount(msg):
+#@job(config.RQ_WORKER_LEVEL, connection=rds, timeout=5)
 def logcount(msg):
     main_key = "%s-%s-%s" % (msg['name'], msg['entrypoint'], msg['date'])
     timestamp = time.mktime(time.strptime(msg['datetime'], '%Y-%m-%d %H:%M:%S'))

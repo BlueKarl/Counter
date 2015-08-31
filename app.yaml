@@ -1,7 +1,7 @@
 appname: "logcount"
 entrypoints:
-  rq:
-    cmd: "rqworker -c settings"
+  celery:
+    cmd: "celery -A log.logdeal worker -l debug"
   command:
     cmd: "python main.py"
   web:
