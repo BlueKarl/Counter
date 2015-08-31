@@ -2,7 +2,7 @@
 
 import time
 import logging
-from rq.decorators import job
+#from rq.decorators import job
 from log import redisconnect, celeryconnect
 from log import config
 
