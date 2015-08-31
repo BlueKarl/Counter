@@ -1,19 +1,31 @@
-{% extends './base.html' %}
+{% extends "./base.html" %}
 {% block title %}日志分析绘图{% endblock %}
 {% block head %}
+<style>
+input[type="text"]{
+    padding-bottom: 0px;
+    padding-top: 0px;
+    padding-left: 20px;
+    padding-right: 0px;
+    width: 480px;
+}
+div[class="input-group"]{
+    text-align: center;
+}
+</style>
 {% endblock %}
 {% block body %}
 <canvas id="canvas"></canvas>
 <form action="" method="POST">
-  <div class="input-group" style="text-align:center">
+  <div class="input-group">
     <span class="input-group-addon">输入</span>
-    <input type="text" name='dates' class="form-control" placeholder="格式：name-entrypoint-date  如：odan-web-macvlan-2015-08-22" id='1' style='width: 480px;padding-bottom: 0px;padding-top: 0px;padding-left: 20px;padding-right: 0px;'/>
-  <button id='count' type="button" class='btn btn-primary'>开始绘图</button>
+    <input class="form-control" id="select_input" name="dates" type="text" placeholder="格式：name-entrypoint-date  如：odan-web-macvlan-2015-08-22"/>
+    <button class="btn btn-primary" id="count" type="button">开始绘图</button>
   </div>
 </form>
 <script>
-$('#count').click(function(){
-    var date_value = $("#1").val();
+$("#count").click(function(){
+    var date_value = $("#select_input").val();
     var a;
     var b;
     $.get("/request/data/" + date_value, function(data){

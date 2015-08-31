@@ -1,20 +1,40 @@
 <!doctype html>
-<html>
+<html lang="zh-CN">
 <head>
-<meta charset='utf-8'>
-<title>{% block title %}{% endblock %}</title>
-<link rel='stylesheet' type='text/css' href='/static/css/flat-ui.min.css'>
-<script src='/static/js/jquery.min.js'></script>
-<script src='/static/js/flat-ui.min.js'></script>
-<script src='/static/js/Chart.js'></script>
+  <meta charset="utf-8">
+  <title>{% block title %}{% endblock %}</title>
+  <link rel="stylesheet" href="/static/css/flat-ui.min.css">
+  <script src="/static/js/jquery.min.js"></script>
+  <script src="/static/js/flat-ui.min.js"></script>
+  <script src="/static/js/Chart.js"></script>
+  <style>
+      body{
+          margin-top: 0px;
+          margin-left: 0px;
+          margin-right: 0px;
+          background-size: cover;
+          background-image: url(../static/images/world.jpg);
+      }
+      .navbar-inverse{
+          margin-bottom: 0px;
+          background-color: black;
+      }
+      .navbar-header{
+          margin-top: 14px;
+      }
+      .navbar-brand{
+          padding-left: 45px;
+      }
+  </style>
 {% block head %}{% endblock %}
 </head>
-<body style="margin-top: 0px;margin-left: 0px;margin-right: 0px;background-size:cover; background-image: url(../static/images/pattern.png), url(../static/images/world.jpg);">
-    <header>
-        <nav class='navbar navbar-inverse navbar-embossed' role='navigation' style='margin-bottom:0px;background-color:black'>
-            <div class='navbar-header' style="margin-top: 14px;">
-                <a class='navbar-brand' style="padding-left: 45px;" href='/'>日志分析</a>
-            </div>
-    </header>
-<div class='main-width'>{% block body %}{% endblock %}</div>
+<body>
+  <header>
+    <nav class="navbar navbar-inverse navbar-embossed" role="navigation">
+      <div class="navbar-header">
+        <a class="navbar-brand" href='/'>日志分析</a>
+      </div>
+    </nav>
+  </header>
+  <div class="main-width">{% block body %}{% endblock %}</div>
 
