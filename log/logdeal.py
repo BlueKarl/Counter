@@ -10,7 +10,6 @@ app = celeryconnect()
 rds = redisconnect()
 
 @app.task
-def logcount(msg):
 #@job(config.RQ_WORKER_LEVEL, connection=rds, timeout=5)
 def logcount(msg):
     main_key = "%s-%s-%s" % (msg['name'], msg['entrypoint'], msg['date'])
