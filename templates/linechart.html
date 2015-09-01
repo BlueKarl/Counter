@@ -28,9 +28,6 @@ $("#count").click(function(){
     var date_value = $("#select_input").val();
     var a;
     var b;
-    $.get("/request/data/" + date_value, function(data){
-        a = data;
-    });
     $.ajax({
         type: "GET",
         async: false, //同步执行
@@ -68,7 +65,8 @@ $("#count").click(function(){
     } 
     var ctx = document.getElementById("canvas").getContext("2d");
     window.myLine = new Chart(ctx).Line(lineChartData, {
-        responsive: true
+        responsive: true,
+        showXLabels: 7
     });
 });
 </script>
