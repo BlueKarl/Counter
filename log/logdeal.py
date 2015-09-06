@@ -1,7 +1,6 @@
 #coding:utf-8
 
 import time
-import logging
 from log import redisconnect, celeryconnect
 from log import config
 

@@ -3,10 +3,10 @@
 import sys
 import json
 import time
-import logging
 import redis
 from log import config
 from log.logdeal import logcount
+
 
 def logsend(host, port):
     rds = redis.Redis(host=host, port=port)
@@ -19,5 +19,4 @@ def logsend(host, port):
         data = str(m["data"])
         data_value = json.loads(data)
         if isinstance(data_value, dict):
-            logging.warning(data_value)
             logcount.delay(data_value)
