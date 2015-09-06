@@ -6,7 +6,6 @@ import os
 #REDIS_HOST = os.getenv('REDIS_HOST', 'localhost')
 #REDIS_PORT = os.getenv('REDIS_PORT', 6379)
 
-
 #---------------intra----------------
 #PROXY_REDIS_HOST = os.getenv('PROXY_REDIS_HOST', '10.200.8.29')
 #PROXY_REDIS_PORT = os.getenv('PROXY_REDIS_PORT', 8802)

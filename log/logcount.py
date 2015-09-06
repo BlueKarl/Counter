@@ -19,4 +19,6 @@ def logsend(host, port):
         data = str(m["data"])
         data_value = json.loads(data)
         if isinstance(data_value, dict):
-            logcount.delay(data_value)
+            timestamp = time.mktime(time.strptime(data_value['datetime'], '%Y-%m-%d %H:%M:%S'))
+            main_key = "%s-%s-%s" % (data_value['name'],data_value['entrypoint'], data_value['date'])
+            logcount.delay(main_key, timestamp)
