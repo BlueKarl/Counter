@@ -1,7 +1,7 @@
 appname: "logcount"
 entrypoints:
   celery:
-    cmd: "celery -A log.logdeal worker -l debug"
+    cmd: "celery -A log.logdeal worker -l warning"
   command:
     cmd: "python main.py"
   web:

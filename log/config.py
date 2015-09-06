@@ -1,4 +1,4 @@
-#condig:utf-8
+#coding:utf-8
 import os
 
 #PROXY_REDIS_HOST = os.getenv('REDIS_HOST', 'localhost')
