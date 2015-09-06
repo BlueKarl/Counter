@@ -1,6 +1,6 @@
+#condig:utf-8
 import os
 
-#---------------本地-----------------
 #PROXY_REDIS_HOST = os.getenv('REDIS_HOST', 'localhost')
 #PROXY_REDIS_PORT = os.getenv('REDIS_PORT', 6379)
 #REDIS_HOST = os.getenv('REDIS_HOST', 'localhost')
