@@ -1,5 +1,6 @@
 #coding:utf-8
 import os
+#from kombu import Exchange, Queue
 
 #PROXY_REDIS_HOST = os.getenv('REDIS_HOST', 'localhost')
 #PROXY_REDIS_PORT = os.getenv('REDIS_PORT', 6379)
@@ -23,3 +24,13 @@ CELERY_BROKER_URL = 'redis://%s:%d' % (REDIS_HOST, REDIS_PORT)
 CELERY_RESULT_BACKEND = 'redis://%s:%d' % (REDIS_HOST, REDIS_PORT)
 
 SUBSCRIBE = os.getenv('SUBSCRIBE', 'ERU:LOGCOUNT')
+
+#CELERY_QUEUES = (
+#    Queue('default', Exchange('default'), routing_key='default'),
+#    Queue('logcount1', Exchange('logcount1'), routing_key='logcount1'),
+#    Queue('logcount2', Exchange('logcount2'), routing_key='logcount2'),
+#)
+#CELERY_ROUTES = {
+#    'logcount1': {'queue': 'logcount1', 'routing_key': 'logcount1'},
+#    'logcount2': {'queue': 'logcount2', 'routing_key': 'logcount2'},
+#}

@@ -9,3 +9,8 @@ rds = redisconnect()
 @app.task
 def logcount(main_key, timestamp):
     rds.hincrby(main_key, timestamp, 1)
+
+#@app.task
+#def logcount2(main_key, timestamp):
+#    rds.hincrby(main_key, timestamp, 1)
+

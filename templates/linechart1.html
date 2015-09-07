@@ -1,0 +1,74 @@
+{% extends "./base.html" %}
+{% block title %}日志分析绘图{% endblock %}
+{% block head %}
+<style>
+input[type="text"]{
+    padding-bottom: 0px;
+    padding-top: 0px;
+    padding-left: 20px;
+    padding-right: 0px;
+    width: 480px;
+}
+div[class="input-group"]{
+    text-align: center;
+}
+</style>
+{% endblock %}
+{% block body %}
+<canvas id="canvas"></canvas>
+<form action="" method="POST">
+  <div class="input-group">
+    <span class="input-group-addon">输入</span>
+    <input class="form-control" id="select_input" name="dates" type="text" placeholder="格式：name-entrypoint-date  如：odan-web-macvlan-2015-08-22"/>
+    <button class="btn btn-primary" id="count" type="button">开始绘图</button>
+  </div>
+</form>
+<script>
+$("#count").click(function(){
+    var date_value = $("#select_input").val();
+    var a;
+    var b;
+    $.ajax({
+        type: "GET",
+        async: false, //同步执行
+        url: "/request/data/"+date_value,
+        dataType: 'json',
+        success: function(result){
+        a=result
+        }
+    });
+
+    $.ajax({
+        type: "GET",
+        async: false, //同步执行
+        url: "/request/numbers/"+date_value,
+        dataType: 'json',
+        success: function(result){
+        b=result
+        }
+    });
+
+    var lineChartData = {
+        labels : a,
+        datasets : [
+            {
+                label: "QPS",
+                fillColor : "rgba(0,245,255,0.2)",
+                strokeColor : "rgba(0,245,255,1)",
+                pointColor : "rgba(0,245,255,1)",
+                pointStrokeColor : "#00FFFB",
+                pointHighlightFill : "#00FFFB",
+                pointHighlightStroke : "rgba(0,0,0,1)",
+                data : b
+            },
+        ]
+    } 
+    var ctx = document.getElementById("canvas").getContext("2d");
+    window.myLine = new Chart(ctx).Line(lineChartData, {
+        responsive: true,
+        showXLabels: 7
+    });
+});
+</script>
+</body>
+{% endblock %}

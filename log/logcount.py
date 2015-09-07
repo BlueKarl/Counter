@@ -21,4 +21,8 @@ def logsend(host, port):
         if isinstance(data_value, dict):
             timestamp = time.mktime(time.strptime(data_value['datetime'], '%Y-%m-%d %H:%M:%S'))
             main_key = "%s-%s-%s" % (data_value['name'],data_value['entrypoint'], data_value['date'])
+#            if timestamp % 2 == 0:
+#                logcount1.delay(main_key, timestamp)
+#            else:
+#                logcount2.delay(main_key, timestamp)
             logcount.delay(main_key, timestamp)
