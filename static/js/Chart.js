@@ -141,13 +141,13 @@
 			tooltipCaretSize: 8,
 
 			// Number - Pixel radius of the tooltip border
-			tooltipCornerRadius: 6,
+			tooltipCornerRadius: 1,
 
 			// Number - Pixel offset from point x to tooltip edge
 			tooltipXOffset: 10,
 
 			// String - Template string for single tooltips
-			tooltipTemplate: "<%if (label){%><%=label%>: <%}%><%= value %>",
+			tooltipTemplate: "<%if (label){%><%=label%>'s QPS is <%}%><%= value %>",
 
 			// String - Template string for single tooltips
 			multiTooltipTemplate: "<%= value %>",

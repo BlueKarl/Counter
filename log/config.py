@@ -1,11 +1,10 @@
 #coding:utf-8
 import os
-#from kombu import Exchange, Queue
 
-#PROXY_REDIS_HOST = os.getenv('REDIS_HOST', 'localhost')
-#PROXY_REDIS_PORT = os.getenv('REDIS_PORT', 6379)
-#REDIS_HOST = os.getenv('REDIS_HOST', 'localhost')
-#REDIS_PORT = os.getenv('REDIS_PORT', 6379)
+PROXY_REDIS_HOST = os.getenv('REDIS_HOST', 'localhost')
+PROXY_REDIS_PORT = os.getenv('REDIS_PORT', 6379)
+REDIS_HOST = os.getenv('REDIS_HOST', 'localhost')
+REDIS_PORT = os.getenv('REDIS_PORT', 6379)
 
 #---------------intra----------------
 #PROXY_REDIS_HOST = os.getenv('PROXY_REDIS_HOST', '10.200.8.29')
@@ -14,23 +13,13 @@ import os
 #REDIS_PORT = os.getenv('REDIS_PORT', 6379)
 
 #----------------yg------------------
-PROXY_REDIS_HOST = os.getenv('PROXY_REDIS_HOST', 'redis-logcount.yg.hunantv.com')
-PROXY_REDIS_PORT = os.getenv('PROXY_REDIS_PORT', 8889)
-REDIS_HOST = os.getenv('REDIS_HOST', '10.21.199.249')
-REDIS_PORT = os.getenv('REDIS_PORT', 6379)
+#PROXY_REDIS_HOST = os.getenv('PROXY_REDIS_HOST', 'redis-logcount.yg.hunantv.com')
+#PROXY_REDIS_PORT = os.getenv('PROXY_REDIS_PORT', 8889)
+#REDIS_HOST = os.getenv('REDIS_HOST', '10.21.199.249')
+#REDIS_PORT = os.getenv('REDIS_PORT', 6379)
 
 CELERY_NAME = os.getenv('CELERY_NAME','logdeal')
 CELERY_BROKER_URL = 'redis://%s:%d' % (REDIS_HOST, REDIS_PORT)
 CELERY_RESULT_BACKEND = 'redis://%s:%d' % (REDIS_HOST, REDIS_PORT)
 
 SUBSCRIBE = os.getenv('SUBSCRIBE', 'ERU:LOGCOUNT')
-
-#CELERY_QUEUES = (
-#    Queue('default', Exchange('default'), routing_key='default'),
-#    Queue('logcount1', Exchange('logcount1'), routing_key='logcount1'),
-#    Queue('logcount2', Exchange('logcount2'), routing_key='logcount2'),
-#)
-#CELERY_ROUTES = {
-#    'logcount1': {'queue': 'logcount1', 'routing_key': 'logcount1'},
-#    'logcount2': {'queue': 'logcount2', 'routing_key': 'logcount2'},
-#}
