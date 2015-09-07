@@ -37,7 +37,7 @@
 	Chart.defaults = {
 		global: {
 			// Boolean - Whether to animate the chart
-			animation: true,
+			animation: false,
 
 			// Number - Number of animation steps
 			animationSteps: 60,
