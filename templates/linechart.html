@@ -61,26 +61,28 @@ $("select").change(function(){
         }
     });
     var value = $(this).children('option:selected').val()
-    if(value=1){
+    if(value=="1"){
         choose_menu = 600
-    }
-    if(value=2){
+    };
+    if(value=="2"){
         choose_menu = 3600
-    }
-    if(value=3){
+    };
+    if(value=="3"){
         choose_menu = 18000
-    }
-    if(value=4){
+    };
+    if(value=="4"){
         choose_menu = 36000
-    }
-    if(value=5){
+    };
+    if(value=="5"){
         choose_menu = a.length
-    }
+    };
 
     if(choose_menu<a.length){
-        var choose_value = a.length - choose_menu
+        var choose_value = a.length - choose_menu;
     }
-    else var choose_value = 0
+    else {
+        var choose_value = 0;
+    };
     for (i=choose_value; i<a.length; i++){
         var dates = new Date(a[i]*1000)
         h = dates.getHours() + ':';
@@ -88,7 +90,7 @@ $("select").change(function(){
         s = dates.getSeconds(); 
         newdate.push(h+m+s);
         b_data.push(b[i])     
-    }
+    };
     var lineChartData = {
         labels : newdate,
         datasets : [
