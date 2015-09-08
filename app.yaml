@@ -1,9 +1,7 @@
 appname: "logcount"
 entrypoints:
-  celery1:
-      cmd: "celery -A log.logdeal worker -l warning --concurrency=10 -n worker1.logcount.com"
-  celery2:
-      cmd: "celery -A log.logdeal worker -l warning --concurrency=10 -n worker2.logcount.com"
+  celery:
+      cmd: "celery multi start 2 -A log.logdeal -c 10 -l warning"
   command:
     cmd: "python main.py"
   web:
