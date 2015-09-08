@@ -1,7 +1,7 @@
 appname: "logcount"
 entrypoints:
   celery:
-    cmd: "celery multi start 2 -A log.logdeal -c 10 -l warning --pidfile=/logcount/permdir/%N.pid --logfile=/logcount/permdir/%N.log"
+    cmd: "celery multi start 2 -A log.logdeal -c 10 -l warning --pidfile=./logcount/permdir/%N.pid --logfile=./logcount/permdir/%N.log"
   command:
     cmd: "python main.py"
   web:
