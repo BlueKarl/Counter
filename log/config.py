@@ -15,7 +15,7 @@ import os
 #----------------yg------------------
 PROXY_REDIS_HOST = os.getenv('PROXY_REDIS_HOST', 'redis-logcount.yg.hunantv.com')
 PROXY_REDIS_PORT = os.getenv('PROXY_REDIS_PORT', 8889)
-REDIS_HOST = os.getenv('REDIS_HOST', '10.21.199.249')
+REDIS_HOST = os.getenv('REDIS_HOST', '10.21.57.7')
 REDIS_PORT = os.getenv('REDIS_PORT', 6379)
 
 CELERY_NAME = os.getenv('CELERY_NAME','logdeal')
