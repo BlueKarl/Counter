@@ -1,0 +1,170 @@
+{% extends "./base.html" %}
+{% block title %}日志分析绘图{% endblock %}
+{% block head %}
+<style>
+input[type="text"]{
+    padding-bottom: 0px;
+    padding-top: 0px;
+    padding-left: 20px;
+    padding-right: 0px;
+    width: 480px;
+}
+div[class="input-group"]{
+    text-align: center;
+}
+.select{
+    margin-top: 2px;
+}
+</style>
+{% endblock %}
+{% block body %}
+<canvas id="canvas"></canvas>
+<form action="" method="POST">
+  <div class="input-group">
+    <span class="input-group-addon">输入</span>
+    <input class="form-control" id="select_input" name="dates" type="text" placeholder="格式：name-entrypoint-date  如：odan-web-macvlan-2015-08-22"/>
+    <button class="btn btn-primary" id="count" type="button">开始绘图</button>
+    <select class="select select-primary" id="select">
+        <option value="5">查看原始qps</option>
+        <option value="1">查看最近10分钟qps</option>
+        <option value="2">查看最近1小时qps</option>
+        <option value="3">查看最近5小时qps</option>
+        <option value="4">查看最近12小时qps</option>
+    </select>
+  </div>
+</form>
+<script>
+$("select").select2({dropdownCssClass: 'dropdown-inverse'});
+$("select").change(function(){
+    var date_value = $("#select_input").val();
+    var a;
+    var b;
+    var newdate = [];
+    var b_data = [];
+    $.ajax({
+        type: "GET",
+        async: false, //同步执行
+        url: "/request/data/"+date_value,
+        dataType: 'json',
+        success: function(result){
+        a=result
+        }
+    });
+
+    $.ajax({
+        type: "GET",
+        async: false, //同步执行
+        url: "/request/numbers/"+date_value,
+        dataType: 'json',
+        success: function(result){
+        b=result
+        }
+    });
+    var value = $(this).children('option:selected').val()
+    if(value=="1"){
+        choose_menu = 600
+    };
+    if(value=="2"){
+        choose_menu = 3600
+    };
+    if(value=="3"){
+        choose_menu = 18000
+    };
+    if(value=="4"){
+        choose_menu = 36000
+    };
+    if(value=="5"){
+        choose_menu = a.length
+    };
+
+    if(choose_menu<a.length){
+        var choose_value = a.length - choose_menu;
+    }
+    else {
+        var choose_value = 0;
+    };
+    for (i=choose_value; i<a.length; i++){
+        var dates = new Date(a[i]*1000)
+        h = dates.getHours() + ':';
+        m = dates.getMinutes() + ':';
+        s = dates.getSeconds(); 
+        newdate.push(h+m+s);
+        b_data.push(b[i])     
+    };
+    var lineChartData = {
+        labels : newdate,
+        datasets : [
+            {
+                label: "QPS",
+                fillColor : "rgba(0,245,255,0.2)",
+                strokeColor : "rgba(0,245,255,1)",
+                pointColor : "rgba(0,245,255,1)",
+                pointStrokeColor : "#00FFFB",
+                pointHighlightFill : "#00FFFB",
+                pointHighlightStroke : "rgba(0,0,0,1)",
+                data : b_data
+            },
+        ]
+    } 
+    var ctx = document.getElementById("canvas").getContext("2d");
+    window.myLine = new Chart(ctx).Line(lineChartData, {
+        responsive: true,
+        showXLabels: 7
+    });   
+});
+$("#count").click(function(){
+    var date_value = $("#select_input").val();
+    var a;
+    var b;
+    var newdate = []
+    $.ajax({
+        type: "GET",
+        async: false, //同步执行
+        url: "/request/data/"+date_value,
+        dataType: 'json',
+        success: function(result){
+        a=result
+        }
+    });
+
+    $.ajax({
+        type: "GET",
+        async: false, //同步执行
+        url: "/request/numbers/"+date_value,
+        dataType: 'json',
+        success: function(result){
+        b=result
+        }
+    });
+//    var choose_value = a.length - choose_menu
+    for (i=0; i<a.length; i++){
+        var dates = new Date(a[i]*1000)
+        h = dates.getHours() + ':';
+        m = dates.getMinutes() + ':';
+        s = dates.getSeconds(); 
+        newdate.push(h+m+s);    
+    }
+    var lineChartData = {
+        labels : newdate,
+        datasets : [
+            {
+                label: "QPS",
+                fillColor : "rgba(0,245,255,0.2)",
+                strokeColor : "rgba(0,245,255,1)",
+                pointColor : "rgba(0,245,255,1)",
+                pointStrokeColor : "#00FFFB",
+                pointHighlightFill : "#00FFFB",
+                pointHighlightStroke : "rgba(0,0,0,1)",
+                data : b
+            },
+        ]
+    } 
+    var ctx = document.getElementById("canvas").getContext("2d");
+    window.myLine = new Chart(ctx).Line(lineChartData, {
+        responsive: true,
+        showXLabels: 7
+    });
+});
+</script>
+</body>
+{% endblock %}

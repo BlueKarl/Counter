@@ -8,7 +8,7 @@ app = Flask(__name__)
 
 @app.route('/', methods=['GET', 'POST'])
 def index():
-    return render_template('linechart.html')
+    return render_template('test.html')
 
 @app.route('/request/data/<date_value>')
 def count(date_value):

@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+{% extends "./base.html" %}
+{% block title %}日志分析绘图{% endblock %}
+{% block head %}
+<style>
+  input[type="text"]{
+    padding-bottom: 0px;
+    padding-top: 0px;
+    padding-left: 20px;
+    padding-right: 0px;
+    width: 480px;
+}
+  div[class="input-group"]{
+    text-align: center;
+    margin-top: 10px;
+}
+</style>
+<script src="../static/build/dist/echarts-all.js"></script>
+{% endblock %}
+{% block body %}
+<!-- 为ECharts准备一个具备大小（宽高）的Dom -->
+<div id="main" style="height:500px"></div>
+<form action="" method="POST">
+  <div class="input-group">
+    <span class="input-group-addon">输入</span>
+    <input class="form-control" id="select_input" name="dates" type="text" placeholder="格式：name-entrypoint-date  如：odan-web-macvlan-2015-08-22"/>
+    <button class="btn btn-primary" id="count" type="button">开始绘图</button>
+  </div>
+</form>
+<script type="text/javascript">
+
+// 路径配置
+var myChart = echarts.init(document.getElementById('main'));
+$("#count").click(function(){
+    var date_value = $("#select_input").val();
+    var a;
+    var b;
+    var newdate = [];
+    var value;
+    var strdatevalue = date_value.split('-')
+    var title = strdatevalue[0]
+    $.ajax({
+        type: "GET",
+        async: false, //同步执行
+        url: "/request/data/"+date_value,
+        dataType: 'json',
+        success: function(result){
+        a=result
+        }
+    });
+
+    $.ajax({
+        type: "GET",
+        async: false, //同步执行
+        url: "/request/numbers/"+date_value,
+        dataType: 'json',
+        success: function(result){
+        b=result
+        }
+    });
+    for (i=0; i<a.length; i++){
+        var dates = new Date(a[i]*1000)
+        h = dates.getHours() + ':';
+        m = dates.getMinutes() + ':';
+        s = dates.getSeconds();
+        newdate.push(h+m+s);
+    } 
+    option = {
+        title : {
+            text : '',
+            subtext : ''
+        },
+        tooltip : {
+            trigger: 'item',
+            formatter : function (params) {
+                var date = params.value[0];
+                data = date.getHours() + ':'
+                       + date.getMinutes() + ':'
+                       + date.getSeconds();
+                return data + '<br/>'
+                       + 'QPS : ' + params.value[1] 
+            }
+        },
+        toolbox: {
+            show : true,
+            feature : {
+                mark : {show: true},
+                dataView : {show: true, readOnly: false},
+                restore : {show: true},
+                saveAsImage : {show: true}
+            }
+        },
+        dataZoom: {
+            show: true,
+            start : 70
+        },
+        legend : {
+            data : [title]
+        },
+        grid: {
+            y2: 80
+        },
+        xAxis : [
+            {
+                type : 'time',
+                splitNumber:10
+            }
+        ],
+        yAxis : [
+            {
+                type : 'value'
+            }
+        ],
+        series : [
+            {
+                name: title,
+                type: 'line',
+                showAllSymbol: true,
+                symbolSize: function (value){
+                  //  return Math.round(value[2]/10) + 2;
+                  return 1
+                },
+                data: (function () {
+                    var d = [];
+                    var len = 0;
+                    //var now = new Date();
+                    var value;
+                    while (len++ < a.length) {
+                        d.push([
+                           // newdate[len],
+                           // b[len]
+                          new Date(a[len]*1000),
+                          b[len]
+                        ]);
+                    }
+                    return d;
+                })()
+            }
+        ]
+    }
+    myChart.setOption(option);
+});
+</script>
+</body>
+{% endblock %}
