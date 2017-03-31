@@ -85,14 +85,22 @@ $("#count").click(function(){
             show : true,
             feature : {
                 mark : {show: true},
+                dataZoom : {show: true},
                 dataView : {show: true, readOnly: false},
+                magicType: {show: true, type: ['line', 'bar']},
                 restore : {show: true},
                 saveAsImage : {show: true}
             }
         },
         dataZoom: {
             show: true,
-            start : 70
+            start : 70,
+            end: 100,
+            realtime: true,
+            backgroundColor: 'rgba(221,160,221,0.1)',
+            //dataBackgroundColor: 'rgba(138,43,226,0.5)',
+            fillerColor: 'rgba(0,233,255,0.2)',
+            handleColor: 'rgba(0,191,255,0.8)', 
         },
         legend : {
             data : [title]
@@ -102,6 +110,7 @@ $("#count").click(function(){
         },
         xAxis : [
             {
+                splitLine: false,
                 type : 'time',
                 splitNumber:10
             }

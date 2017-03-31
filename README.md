@@ -1,4 +1,10 @@
-two entrypoint:"main.py" "app.py"
+TWO entrypoints:"main.py" "app.py"
 
-main.py - command
-app.py - web
+celery used in main.py
+app.py run at 'logcount-web.yg.hunantv.com'
+
+we need REDIS to save date
+
+tips:
+    main.py - command
+    app.py - web
